@@ -1,15 +1,16 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
+let points = 0;
 const img = new Image();
 img.onload = () => {
   ctx.drawImage(img, 0, 0);
-  ctx.beginPath();
-  ctx.moveTo(30, 96);
-  ctx.lineTo(70, 66);
-  ctx.lineTo(103, 76);
-  ctx.lineTo(170, 15);
-  ctx.stroke();
+  // ctx.beginPath();
+  // ctx.moveTo(30, 96);
+  // ctx.lineTo(70, 66);
+  // ctx.lineTo(103, 76);
+  // ctx.lineTo(170, 15);
+  // ctx.stroke();
 };
 img.src = "tractor.svg";
 
@@ -70,7 +71,17 @@ document.addEventListener("keydown", function (event) {
     raf = window.requestAnimationFrame(draw);
     console.log(tractor.x);
   }
-  if (hay.x == tractor.x && hay.y == tractor.y) hay.exists = 0;
+  if (
+    tractor.x >= hay.x - 30 &&
+    tractor.x <= hay.x + 0 &&
+    tractor.y >= hay.y - 30 &&
+    tractor.y <= hay.y + 0 &&
+    hay.exists
+  ) {
+    hay.exists = 0;
+    points++;
+    document.getElementById("h2").innerHTML = `Points: ${points}`;
+  }
 });
 
 tractor.draw();
